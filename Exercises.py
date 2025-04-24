@@ -88,5 +88,16 @@ elif numero % 3 == 0:
     print ("Fizz Multiplo de 3 :o")
 else:
     print (numero)
+
+### Solicitar un número de 4 cifras al usuario###
+numero = input("Introduce un número de 4 cifras: ")
+#Verificar que el número tenga exactamente 4 cifras
+if len(numero) == 4 and numero.isdigit() and not numero.startswith("0"):
+#Extraer los dígitos y agruparlos de dos en dos
+    pares = [numero[:2], numero[2:]]
+#Imprimir los pares separados por coma
+    print(",".join(pares))
+else:
+    print("Por favor, introduce un número válido de 4 cifras.")
     
     
