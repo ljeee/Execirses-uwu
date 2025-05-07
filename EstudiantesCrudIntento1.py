@@ -1,4 +1,9 @@
-Variable = []
+Variable = [
+    {'Nombre': 'Jeferson', 'Edad': '20', 'Calificación': '100', 'Clan': 'Linux'},
+    {'Nombre': 'Kain', 'Edad': '22', 'Calificación': '100', 'Clan': 'Linux'},
+    {'Nombre': 'Toph', 'Edad': '23', 'Calificación': '90', 'Clan': 'Loveplace'},
+    {'Nombre': 'Yoru', 'Edad': '25', 'Calificación': '100', 'Clan': 'Loveplace'}
+]
 chose = 0
 
 while True:
@@ -45,17 +50,17 @@ while True:
     elif chose == "3" or chose == "eliminar":
         if Variable:
             print("Lista de estudiantes")
-            for i, studentt in enumerate(Variable,1):
+            for i, studentt in enumerate(Variable,InfoEstudiante,1):
                 print(f"{i} . {studentt['Nombre']}")
                 try:
-                    Index = float(input("Cual desea eliminar")) -1
-                    if Index == -1:
+                    Index = int(input("Cual desea eliminar"))
+                    if Index == 0:
                         continue
-                    elif 0 <= Index < len(Variable):
-                        RemoveStundent= Variable.pop(Index)
-                        print(f"Este estudiante ha sido eliminado: {RemoveStundent['Nombre']}") 
+                    elif 1 <= Index <= len(Variable):
+                        RemoveStundent = Variable.pop(Index - 1)
+                        print(f"Este estudiante ha sido eliminado: {RemoveStundent['Nombre']}")
                     else:
-                        print("Wtf")
+                        print("Índice fuera de rango")
                 except ValueError:
                     print("?????")
         else:
