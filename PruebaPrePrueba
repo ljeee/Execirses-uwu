@@ -1,0 +1,119 @@
+Inventory = {
+    "Book A": {"price": 1599, "Quantity": 10},
+    "Book B": {"price": 9099, "Quantity": 5},
+    "Book C": {"price": 2000, "Quantity": 2},
+    "Book D": {"price": 7050, "Quantity": 8},
+    "Book E": {"price": 12075, "Quantity": 4},
+}
+#Add books
+def AddBooks():
+    print("Books")
+    while True:
+        Name = input("Introduce el nombre(or exit for go to the menu): ")
+        if Name in Inventory:
+            print("Este contacto ya existe")
+        elif Name.lower() in ["salir", "exit", "end"]:
+            Menu()
+            return
+        elif not Name:
+            print("You're introducing no name")
+        else:
+            print(f"Book {Name} inserted")
+            break
+    while True:
+        Price = float(input("Introduce the price: "))
+        if Price > 0 :
+            print(f"Price of {Name} inserted")
+            break
+        elif not Quantity:
+            print("La cantidad no puede estar vacia")
+            continue
+        else:
+            print("You know how to follow instructions?")
+            continue
+    while True:
+        Quantity = int(input("Enter the amount to be added to stock: "))
+        if Quantity < 0 or Quantity == str(0):
+            print("I led you put 0 only for preinvetory and you are trying to steel something or what xd")
+            continue
+        elif not Quantity:
+            print("La cantidad no puede estar vacia")
+            continue
+        else:
+            print("Quantity introduced")
+            break
+    Inventory[Name] = {"price": Price, "Quantity": Quantity}
+    print(f"Inventory updated: {Inventory}")
+    return Inventory[Name]
+
+#Search books in the inventory
+def LookingForBooks():
+    print("Introduce el libro que quieres buscar: ")
+    LookinForBook = input("Introduce the name of the book what are you looking for: ")
+    if LookinForBook in Inventory:     
+        DataBook = Inventory[LookinForBook]   
+        print("==========================================")
+        print(f"Name of book: {LookinForBook}, Price: {DataBook['price']}, Quantity: {DataBook['Quantity']}")
+        print("==========================================")
+    else:
+        print("That book isn't here")
+
+
+#Uptadte prices
+def UpdatePrices():
+    print("This is the list of books in the inventory")
+    for book, data in Inventory.items():
+        print(f"Book: {book}, Price: {data['price']}, Quantity: {data['Quantity']}")
+    LookForBook= input("Ingrese el nombre del libro que quiere modificar:")
+    if LookForBook in Inventory:
+        while True:
+            ChangePrice = float(input("Cual es el precio que quiere updatear?"))
+            if ChangePrice < 0:
+                print("No puede ser menor a 0 o los va regalar?")
+            else:
+                Inventory[LookForBook]['price']
+                print(f"The price of '{LookForBook}' has been updated to {ChangePrice}.")
+                break
+    else:
+        print(f"The book '{LookForBook}' is not in the inventory.")
+
+#When you want to see all the books
+def WatchallBooks():
+    print("This is the list of books in the inventory")
+    for book in Inventory.items():
+        print(f"Book: {book}")
+
+#Stock Total Value
+def TotalPrices():
+    if not Inventory:
+        ("Print no hay libros")
+    else:
+        TotalPricess= sum(item["price"] * item["Quantity"] for item in Inventory.values())
+        print(F"The total value is: {TotalPricess:.2f}")
+
+#Menu(English)
+def Menu():
+    while True:
+        print("1. Add books")
+        print("2. Search books")
+        print("3. Update prices")
+        print("4. Total value of the stock")
+        print("5. List of books")
+        print("6. Salir Exit Cerrar Close End Finish")
+        option = input("What you wantxd: ").lower()
+        match option:
+            case "1" | "add" | "add books":
+                AddBooks()
+                continue
+            case "2" | "search" | "search books" | "searchbooks":
+                LookingForBooks()
+            case "3" | "updateprices" | "update" | "update prices":
+                UpdatePrices()
+            case "4" | "total" | "total value" | "totalvalue":
+                TotalPrices()
+            case "5" | "list"  | "list of books" | "listofbooks":
+                WatchallBooks() 
+            case "6" | "salir" | "exit" | "cerrar" | "close" | "end" | "finish":
+                break    
+
+Menu()
