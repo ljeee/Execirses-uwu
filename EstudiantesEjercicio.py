@@ -1,143 +1,124 @@
-Variable = [
-    {'Nombre': 'Jeferson', 'Edad': '20', 'Calificación': '100', 'Clan': 'Linux'},
-    {'Nombre': 'Kain', 'Edad': '22', 'Calificación': '100', 'Clan': 'Linux'},
-    {'Nombre': 'Toph', 'Edad': '23', 'Calificación': '90', 'Clan': 'Loveplace'},
-    {'Nombre': 'Yoru', 'Edad': '25', 'Calificación': '100', 'Clan': 'Loveplace'},
-    {'Nombre': 'Test', 'Edad': 'Hay que preguntarle', 'Calificación': 'Unknown', 'Clan': 'Unknown'},
-]
+Inventory = {
+    "A": {"price": 1599, "Quantity": 10},
+    "B": {"price": 9099, "Quantity": 5},
+    "C": {"price": 2000, "Quantity": 2},
+    "D": {"price": 7050, "Quantity": 8},
+    "E": {"price": 12075, "Quantity": 4},
+}
 
-### Agregar Estudiante
-
-def AgregarEstudiante():
-            while True:
-                try:
-                    Nombres = input("Nombre del estudiante que va agregar o salir: \n-")
-                    if Nombres == "salir":
-                        break
-                    # Comprobar si el nombre esta vacioexiste
-                    elif Nombres.strip() == "" or Nombres in Variable:
-                        print("El nombre ya existe, No puede estar vacio, elija otro")
-                    else:
-                        print("Nombre introducido correctamente")
-                    # Conseguir edad
-                    while True:
-                        Edad = input("Edad del estudiante: ")
-                        if Edad.isdigit():
-                            break
-                        else:
-                            print("La edad debe ser un número. Inténtelo nuevamente.")
-                    while True:
-                        Califacion = input("Calificación del estudiante: ")
-                        if Califacion.isdigit():
-                            Califacion = int(Califacion)
-                            if 1 <= Califacion <= 100:
-                                break
-                            else:
-                                print("La calificación debe estar entre 0 y 100. Inténtelo nuevamente.")
-                        else:
-                            print("La calificación debe ser un número. Inténtelo nuevamente.")
-                    #Conseguir clan
-                    Clan= input("!Clan del estudiante Linux/Loveplace/Ghosling/Hopper! \n-")
-                    if Clan.strip() == "":
-                        print("El clan no puede estar vacio")
-                        continue
-                    else:
-                        print(f"Clan introducido correctamente {Clan}")
-                    ### Diccionario
-                    InfoEstudiante = {
-                        "Nombre": Nombres,
-                        "Edad": Edad,
-                        "Calificación": Califacion,
-                        "Clan": Clan,
-                    }
-                    Variable.append(InfoEstudiante)
-                    print(f"Estudiante {Nombres} agregado correctamente.")
-                except Exception as e:
-                    print(f"¡Error! Intentelo correctamente")
-
-### Ver lista de estudiantes
-
-def VerEstudiante():
-    if Variable:
-        print("----------Lista de estudiantes--------\n")
-        for student in Variable:
-            print(f"Estudiante: {student['Nombre']}")
-            print(f"Edad: {student['Edad']}")
-            print(f"Calificacion: {student['Calificación']}")
-            print(f"Clan: {student['Clan']}")
-            print("-"*30)
-    else:
-        print("Wtf???")
-
-### Eliminar Estudiante
-
-def EliminarEstudiante():
-    if Variable:
-        print("Lista de estudiantes")
-        for i, studentt in enumerate(Variable,1):
-            print(f"{i}. {studentt['Nombre']}")
-        Eliminar = input("Que estudiante quiere eliminar o salir: \n-")
-        if Eliminar.lower() == "salir":
-            print("-" * 30)
-            print("Saliendo....")
+#Add books
+def AddBooks():
+    print("Books")
+    while True:
+        Name = input("Introduce el nombre(or exit for go to the menu): ")
+        if Name in Inventory:
+            print("Este contacto ya existe")
+        elif Name.lower() in ["salir", "exit", "end"]:
+            Menu()
             return
-        try:
-            #Try to delete by index
-            index = int(Eliminar) - 1
-            if 0 <= index < len(Variable):
-                removed_student = Variable.pop(index)
-                print(f"Estudiante {removed_student['Nombre']} eliminado correctamente.")
-        except ValueError:
-            for studentt in Variable:
-                if studentt['Nombre'] == Eliminar:
-                    Variable.remove(studentt)
-                    print(f"Eliminando a {studentt['Nombre']}")
-                    return
-                        
-### Modificar Calificacion
-def ModificarCalificacion():
-    if Variable:
-        print("Lista de estudiantes")
-        VerEstudiante()
-        Modificar = input("Que estudiante quiere modificar o salir: \n-")
-        for student in Variable:
-            if student['Nombre'] == Modificar:
-                while True:
-                    try:
-                        Calificacion = int(input("Ingrese la nueva calificación del estudiante: "))
-                        if 0 <= Calificacion <= 100:
-                            student['Calificación'] = Calificacion
-                            print(f"Calificación de {Modificar} modificada correctamente a {Calificacion}.")
-                            return
-                        else:
-                            print("La calificación debe estar entre 1 y 100. Inténtelo nuevamente.")
-                    except Exception as e:
-                        print(f"¡Error! Inténtelo correctamente.")
-            
+        elif not Name:
+            print("You're introducing no name")
+        else:
+            print(f"Book {Name} inserted")
+            break
+    while True:
+        Price = input("Introduce the price: ")
+        if not Price:
+            print("La cantidad no puede estar vacia")
+        if Price.isdigit():
+            Price = float(Price)
+            if Price < 0:
+                print("No puede ser menor a 0 o los va regalar?")
+            else:
+                print(f"Price of {Name} inserted")
+                break
+        else:
+            print("You know how to follow instructions?")
+    while True:
+        Quantity = input("Enter the amount to be added to stock: ")
+        if not Quantity:
+            print("La cantidad no puede estar vacia")
+        if Quantity.isdigit():
+            Quantity = float(Quantity)
+            if Quantity < 0:
+                print("No puede ser menor los va regalar antes de sacarlos?")
+            else:
+                print(f"Price of {Name} inserted")
+                break
+    Inventory[Name] = {"price": Price, "Quantity": Quantity}
+    print(f"Inventory updated: {Inventory}")
 
-### Menu
-chose = 0
-while True:
-    print(f"""
-1. Agregar Estudiante
-2. Ver lista de estudiantes
-3. Eliminar estudiantes
-4. Modificar calificación
-5. Salir """)
-    
-    chose = input("Ingrese que quiere hacer: ").lower()
-    if chose == "1" or chose == "agregar":
-        AgregarEstudiante()
-    elif chose == "2" or chose == "ver":
-        VerEstudiante()
-    elif chose == "3" or chose == "eliminar":
-        EliminarEstudiante()
-    elif chose == "4" or chose == "modificar":
-        ModificarCalificacion()
-    elif chose == "5" or chose == "salir":
-        print(f"-"*30)
-        print("Saliending....")
-        break
+#Search books in the inventory
+def LookingForBooks():
+    print("Introduce el libro que quieres buscar: ")
+    LookinForBook = input("Introduce the name of the book what are you looking for: ")
+    if LookinForBook in Inventory:     
+        DataBook = Inventory[LookinForBook]   
+        print("==========================================")
+        print(f"Name of book: {LookinForBook}, Price: {DataBook['price']}, Quantity: {DataBook['Quantity']}")
+        print("==========================================")
     else:
-        print("???????")
+        print("That book isn't here")
 
+
+#Uptadte prices
+def UpdatePrices():
+    print("This is the list of books in the inventory")
+    WatchallBooks()
+    LookForBook = input("Introduce el libro que quieres updatear: ")
+    if LookForBook in Inventory:
+        while True:
+            ChangePrice = float(input("Cual es el precio que quiere updatear?"))
+            if ChangePrice < 0:
+                print("No puede ser menor a 0 o los va regalar?")
+            else:
+                Inventory[LookForBook]['price'] = ChangePrice
+                print(f"The price of '{LookForBook}' has been updated to {ChangePrice}.")
+                break
+    else:
+        print(f"The book '{LookForBook}' is not in the inventory.")
+
+#When you want to see all the books
+def WatchallBooks():
+    print("This is the list of books in the inventory")
+    if not Inventory:
+        print("No books in the inventory")
+        return
+    for book, data in Inventory.items():
+        print(f"Book: {book}")
+    
+
+#Stock Total Value
+def TotalPrices():
+    if not Inventory:
+        print("No hay libros")
+    else:
+        TotalPricess= sum(item["price"] * item["Quantity"] for item in Inventory.values())
+        print(f"The total value is: {TotalPricess:.2f}")
+
+#Menu(English)
+def Menu():
+    while True:
+        print("1. Add books")
+        print("2. Search books")
+        print("3. Update prices")
+        print("4. Total value of the stock")
+        print("5. List of books")
+        print("6. Salir Exit Cerrar Close End Finish")
+        option = input("What you wantxd: ").lower()
+        match option:
+            case "1" | "add" | "add books":
+                AddBooks()
+                continue
+            case "2" | "search" | "search books" | "searchbooks":
+                LookingForBooks()
+            case "3" | "updateprices" | "update" | "update prices":
+                UpdatePrices()
+            case "4" | "total" | "total value" | "totalvalue":
+                TotalPrices()
+            case "5" | "list"  | "list of books" | "listofbooks":
+                WatchallBooks() 
+            case "6" | "salir" | "exit" | "cerrar" | "close" | "end" | "finish":
+                break    
+
+Menu()
