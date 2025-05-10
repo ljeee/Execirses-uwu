@@ -91,7 +91,7 @@ def WatchallBooks():
 #Stock Total Value
 def TotalPrices():
     if not Inventory:
-        print("No hay libros")
+        print("There aren't books")
     else:
         TotalPricess= sum(item["price"] * item["Quantity"] for item in Inventory.values())
         print(f"The total value is: {TotalPricess:.2f}")
@@ -104,10 +104,10 @@ def Menu():
         print("3. Update prices")
         print("4. Total value of the stock")
         print("5. List of books")
-        print("6. Salir Exit Cerrar Close End Finish")
+        print("6. Salir | Exit | Cerrar | Close | End | Finish")
         option = input("What you wantxd: ").lower()
         match option:
-            case "1" | "add" | "add books":
+            case "1" | "add" | "add books" | "addbooks":
                 AddBooks()
                 continue
             case "2" | "search" | "search books" | "searchbooks":
