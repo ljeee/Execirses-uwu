@@ -1,6 +1,3 @@
-#La ratona dijo no try's
-#And clave in clave
-
 Inventory = {    
     "book a": {"price": 10.99, "Quantity": 5},
     "book b": {"price": 15.50, "Quantity": 3},
