@@ -1,10 +1,14 @@
+#La ratona dijo no try's
+#And clave in clave
+
 Inventory = {
-    "Book A": {"price": 1599, "Quantity": 10},
-    "Book B": {"price": 9099, "Quantity": 5},
-    "Book C": {"price": 2000, "Quantity": 2},
-    "Book D": {"price": 7050, "Quantity": 8},
-    "Book E": {"price": 12075, "Quantity": 4},
+    "A": {"price": 1599, "Quantity": 10},
+    "B": {"price": 9099, "Quantity": 5},
+    "C": {"price": 2000, "Quantity": 2},
+    "D": {"price": 7050, "Quantity": 8},
+    "E": {"price": 12075, "Quantity": 4},
 }
+
 #Add books
 def AddBooks():
     print("Books")
@@ -21,30 +25,31 @@ def AddBooks():
             print(f"Book {Name} inserted")
             break
     while True:
-        Price = float(input("Introduce the price: "))
-        if Price > 0 :
-            print(f"Price of {Name} inserted")
-            break
-        elif not Quantity:
+        Price = input("Introduce the price: ")
+        if not Price:
             print("La cantidad no puede estar vacia")
-            continue
+        if Price.isdigit():
+            Price = float(Price)
+            if Price < 0:
+                print("No puede ser menor a 0 o los va regalar?")
+            else:
+                print(f"Price of {Name} inserted")
+                break
         else:
             print("You know how to follow instructions?")
-            continue
     while True:
-        Quantity = int(input("Enter the amount to be added to stock: "))
-        if Quantity < 0 or Quantity == str(0):
-            print("I led you put 0 only for preinvetory and you are trying to steel something or what xd")
-            continue
-        elif not Quantity:
+        Quantity = input("Enter the amount to be added to stock: ")
+        if not Quantity:
             print("La cantidad no puede estar vacia")
-            continue
-        else:
-            print("Quantity introduced")
-            break
+        if Quantity.isdigit():
+            Quantity = float(Quantity)
+            if Quantity < 0:
+                print("No puede ser menor los va regalar antes de sacarlos?")
+            else:
+                print(f"Price of {Name} inserted")
+                break
     Inventory[Name] = {"price": Price, "Quantity": Quantity}
     print(f"Inventory updated: {Inventory}")
-    return Inventory[Name]
 
 #Search books in the inventory
 def LookingForBooks():
@@ -62,16 +67,15 @@ def LookingForBooks():
 #Uptadte prices
 def UpdatePrices():
     print("This is the list of books in the inventory")
-    for book, data in Inventory.items():
-        print(f"Book: {book}, Price: {data['price']}, Quantity: {data['Quantity']}")
-    LookForBook= input("Ingrese el nombre del libro que quiere modificar:")
+    WatchallBooks()
+    LookForBook = input("Introduce el libro que quieres updatear: ")
     if LookForBook in Inventory:
         while True:
             ChangePrice = float(input("Cual es el precio que quiere updatear?"))
             if ChangePrice < 0:
                 print("No puede ser menor a 0 o los va regalar?")
             else:
-                Inventory[LookForBook]['price']
+                Inventory[LookForBook]['price'] = ChangePrice
                 print(f"The price of '{LookForBook}' has been updated to {ChangePrice}.")
                 break
     else:
@@ -80,8 +84,12 @@ def UpdatePrices():
 #When you want to see all the books
 def WatchallBooks():
     print("This is the list of books in the inventory")
-    for book in Inventory.items():
+    if not Inventory:
+        print("No books in the inventory")
+        return
+    for book, data in Inventory.items():
         print(f"Book: {book}")
+    
 
 #Stock Total Value
 def TotalPrices():
@@ -89,7 +97,7 @@ def TotalPrices():
         ("Print no hay libros")
     else:
         TotalPricess= sum(item["price"] * item["Quantity"] for item in Inventory.values())
-        print(F"The total value is: {TotalPricess:.2f}")
+        print(f"The total value is: {TotalPricess:.2f}")
 
 #Menu(English)
 def Menu():
